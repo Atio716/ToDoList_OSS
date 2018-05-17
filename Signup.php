@@ -20,9 +20,16 @@ protected function postProcess(){
   try{
     $this->_validate();
   }catch (\MyApp\Exception\InvaidEmail $e){
-  
+    echo $e->getMessage();
+      exit;
   }catch (\MyApp\Exception\InvaildPassword $e){
+     echo $e->getMessage();
+      exit;
   }  
+  
+    echo "success";
+    exit;　
+  
   //crate user
   
   //redirect to login
