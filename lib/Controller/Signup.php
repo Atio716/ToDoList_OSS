@@ -19,20 +19,28 @@ protected function postProcess() {
     try {
       $this->_validate();
     } catch (\MyApp\Exception\InvalidEmail $e) {
-      echo $e->getMessage();
-      exit;
+      //echo $e->getMessage();
+      //exit;
+      $this->setErrors('email',$e->getMessage());
     } catch (\MyApp\Exception\InvalidPassword $e) {
-      echo $e->getMessage();
-      exit;
+      //echo $e->getMessage();
+      //exit;
+       $this->setErrors('passsword',$e->getMessage());
     }
   
-    echo "success";
-    exit;
+    //echo "success";
+    //exit;
   
-    // create user
+  if($this->hasErrors()){
+    return;
+  } eles{
+     // create user
 
     // redirect to login
 
+  }
+  
+   
   }
 
   private function _validate() {
