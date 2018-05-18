@@ -40,7 +40,7 @@ protected function postProcess() {
       throw new \MyApp\Exception\InvalidEmail();
     }
 
-    if (!preg_match('/\A[a-zA-Z0-9]+\z/', $_POST['passwor'])) {
+    if (!preg_match('/\A[a-zA-Z0-9]+\z/', $_POST['password'])) {
       throw new \MyApp\Exception\InvalidPassword();
     }
   }
