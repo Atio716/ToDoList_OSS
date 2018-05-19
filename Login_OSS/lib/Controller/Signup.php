@@ -14,36 +14,41 @@ class Signup extends \MyApp\Controller {
       $this->postProcess();
     }
   }
-protected function postProcess() {
+
+  protected function postProcess() {
     // validate
     try {
       $this->_validate();
     } catch (\MyApp\Exception\InvalidEmail $e) {
-      //echo $e->getMessage();
-      //exit;
-      $this->setErrors('email',$e->getMessage());
+      // echo $e->getMessage();
+      // exit;
+      $this->setErrors('email', $e->getMessage());
     } catch (\MyApp\Exception\InvalidPassword $e) {
-      //echo $e->getMessage();
-      //exit;
-       $this->setErrors('passsword',$e->getMessage());
+      // echo $e->getMessage();
+      // exit;
+      $this->setErrors('password', $e->getMessage());
     }
-  
-    //echo "success";
-    //exit;
-  
-  if($this->hasErrors()){
-    return;
-  } eles{
-     // create user
 
-    // redirect to login
+    // echo "success";
+    // exit;
 
-  }
-  
-   
+    $this->setValues('email', $_POST['email']);
+
+    if ($this->hasError()) {
+      return;
+    } else {
+          // create user
+
+          // redirect to login
+    }
   }
 
   private function _validate() {
+    if (!isset($_POST['token']) || $_POST['token'] !== $_SESSION['token']) {
+      echo "Invalid Token!";
+      exit;
+    }
+
     if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
       throw new \MyApp\Exception\InvalidEmail();
     }
@@ -52,6 +57,5 @@ protected function postProcess() {
       throw new \MyApp\Exception\InvalidPassword();
     }
   }
-
 
 }
